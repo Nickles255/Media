@@ -1,24 +1,27 @@
 public class Media {
  
-    private String title, mediaType, genre;
+    private String title, genre;
+    private MediaType mediaType;
     private int id;
+    private static int mediaCount, checkedOutMedia; //M2 HOMEWORK STATIC
     private static final int MIN_ID = 999;
  
     //constructor
-    Media(String title, String mediaType, String genre, int id ) {
+    Media(String title, MediaType mediaType, String genre, int id ) { //M2 HOMEWORK ENUM USE
         this.title=title;
         this.mediaType=mediaType;
         this.genre=genre;
         if(id > MIN_ID ) {
             this.id=id;
         }
+        Media.mediaCount++; //M2HOMEWORK STATIC
     }
  
     //getters and setters
     public String getTitle() {
         return title;
     }
-    public String getMediaType() {
+    public MediaType getMediaType() {
         return mediaType;
     }
     public String getGenre() {
@@ -27,11 +30,19 @@ public class Media {
     public int getId() {
         return id;
     }
+    //M2 HOMEWORK STATIC
+    public static int getMediaCount(){
+        return Media.mediaCount;
+    }
+    //M2 HOMEWORK STATIC
+    public static int getCheckedOutMedia(){
+        return Media.checkedOutMedia;
+    }
  
     public void setTitle(String title) {
         this.title = title;
     }
-    public void setMediaType(String mediaType) {
+    public void setMediaType(MediaType mediaType) {
         this.mediaType = mediaType;
     }
     public void setGenre(String genre) {
@@ -69,10 +80,12 @@ public class Media {
     }
  
     public void borrow() {
+        Media.checkedOutMedia++; //M2HOMEWORK STATIC
         System.out.println("You checked out " + title);
     }
  
     public void turnIn() {
+        Media.checkedOutMedia--; //M2HOMEWORK STATIC
         System.out.println("You returned " + title);
     }
  
